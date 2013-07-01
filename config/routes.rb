@@ -5,4 +5,7 @@ Myflix::Application.routes.draw do
 
   resources :videos, except: :delete do
   end
+
+  resources :categories do
+  end
 end

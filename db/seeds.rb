@@ -11,3 +11,6 @@ Video.create(title: 'Futurama', description: 'American animated science fiction 
 Video.create(title: 'Monk', description: 'American comedy-drama detective mystery television series.', small_cover_url: '/tmp/monk.jpg', large_cover_url: '/tmp/monk_large.jpg')
 Video.create(title: 'South Park', description: ' American adult animated sitcom.', small_cover_url: '/tmp/south_park.jpg')
 
+Category.create(name: 'TV Comedies')
+Category.create(name: 'TV Dramas')
+Category.create(name: 'Reality TV')
