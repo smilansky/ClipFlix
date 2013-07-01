@@ -7,16 +7,22 @@ describe Video do
     Video.first.title.should == "Family Guy"
   end
 
-  it "belongs to category" do
-    video = Video.reflect_on_association(:category)
-    video.macro.should == :belongs_to
-  end
+  # it "belongs to category" do
+  #   video = Video.reflect_on_association(:category)
+  #   video.macro.should == :belongs_to
+  # end
 
-  it "should require a title" do
-    Video.new(:title => "").should_not be_valid
-  end
+  it { should belong_to(:category)}
 
-  it "should require a description" do
-    Video.new(:description => "").should_not be_valid
-  end
+  # it "should require a title" do
+  #   Video.new(:title => "").should_not be_valid
+  # end
+
+  it { validate_presence_of(:title)}
+
+  # it "should require a description" do
+  #   Video.new(:description => "").should_not be_valid
+  # end
+
+  it { validate_presence_of(:description)}
 end
