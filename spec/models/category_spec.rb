@@ -1,9 +1,12 @@
 require 'spec_helper'
 
 describe Category do
-  # it "should have many videos" do
-  #   category = Category .reflect_on_association(:videos)
-  #   category.macro.should == :has_many 
-  # end
+  it "saves itself" do
+    category = Category.new(name: "Mysteries")
+    category.save
+    Category.first.should == category
+  end
+
   it { should have_many(:videos)}
+
 end

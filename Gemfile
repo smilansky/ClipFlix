@@ -24,5 +24,8 @@ gem 'jquery-rails'
 
 group :test, :development do
   gem 'rspec-rails'
-  gem 'shoulda-matchers'
 end  
+
+group :test do
+  gem 'shoulda-matchers'
+end
