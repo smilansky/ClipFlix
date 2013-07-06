@@ -3,9 +3,12 @@ Myflix::Application.routes.draw do
 
   get 'home', to: 'videos#index'
 
-  resources :videos, except: :delete do
+  resources :videos, only: [:show] do
+    collection do
+      post :search, to: 'videos#search'
+    end
   end
 
-  resources :categories do
+  resources :categories, only: [:show] do
   end
 end

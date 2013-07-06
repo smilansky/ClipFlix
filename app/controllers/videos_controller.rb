@@ -10,4 +10,8 @@ class VideosController < ApplicationController
 
   def edit
   end
+
+  def search 
+    @search = Video.search_by_title(params[:search_term])
+  end
 end
