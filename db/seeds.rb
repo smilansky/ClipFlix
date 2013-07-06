@@ -14,5 +14,14 @@ Video.create(title: 'Family Guy', description: 'American adult animated sitcom.'
 Video.create(title: 'South Park', description: ' American adult animated sitcom.', small_cover_url: '/tmp/south_park.jpg', category: tvcomedies)
 Video.create(title: 'Futurama', description: 'American animated science fiction sitcom.', small_cover_url: '/tmp/futurama.jpg', category: tvcomedies)
 Video.create(title: 'Monk', description: 'American comedy-drama detective mystery television series.', small_cover_url: '/tmp/monk.jpg', large_cover_url: '/tmp/monk_large.jpg', category: tvdramas)
+Video.create(title: 'Family Guy', description: 'American adult animated sitcom.', small_cover_url: '/tmp/family_guy.jpg', category: tvcomedies)
+Video.create(title: 'South Park', description: ' American adult animated sitcom.', small_cover_url: '/tmp/south_park.jpg', category: tvcomedies)
+Video.create(title: 'Futurama', description: 'American animated science fiction sitcom.', small_cover_url: '/tmp/futurama.jpg', category: tvcomedies)
+Video.create(title: 'Monk', description: 'American comedy-drama detective mystery television series.', small_cover_url: '/tmp/monk.jpg', large_cover_url: '/tmp/monk_large.jpg', category: tvdramas)
+Video.create(title: 'Family Guy', description: 'American adult animated sitcom.', small_cover_url: '/tmp/family_guy.jpg', category: tvcomedies)
+Video.create(title: 'South Park', description: ' American adult animated sitcom.', small_cover_url: '/tmp/south_park.jpg', category: tvdramas)
+Video.create(title: 'Futurama', description: 'American animated science fiction sitcom.', small_cover_url: '/tmp/futurama.jpg', category: tvdramas)
+Video.create(title: 'Monk', description: 'American comedy-drama detective mystery television series.', small_cover_url: '/tmp/monk.jpg', large_cover_url: '/tmp/monk_large.jpg', category: tvdramas)
+Video.create(title: 'Futurama', description: 'American animated science fiction sitcom.', small_cover_url: '/tmp/futurama.jpg', category: tvdramas)
 
 
