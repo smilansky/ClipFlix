@@ -1,13 +1,13 @@
 %section.sign_in.container
   .row
-    .span10.offset1
+    .span10.offset2
       = form_tag sessions_path do
         %header
           %h1 Sign in
         %div.control-group
           = label_tag :email
-          = text_field_tag :email, params[:email]
+          = text_field_tag :email
         %div.control-group
           = label_tag :password
-          = password_field_tag :password, params[:password]
+          = password_field_tag :password
         = submit_tag "Sign in", class: "btn"
