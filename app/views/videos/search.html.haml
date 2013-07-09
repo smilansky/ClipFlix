@@ -1,0 +1,4 @@
+%article.video-category
+  -@search.each do |video|
+    .video.span2
+      = link_to image_tag(video.small_cover_url), video

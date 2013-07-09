@@ -1,4 +1,5 @@
 class VideosController < ApplicationController
+before_filter :require_user
 
   def index
     @categories = Category.all
@@ -8,6 +9,7 @@ class VideosController < ApplicationController
     @video = Video.find(params[:id])
   end
 
-  def edit
+  def search 
+    @search = Video.search_by_title(params[:search_term])
   end
 end
