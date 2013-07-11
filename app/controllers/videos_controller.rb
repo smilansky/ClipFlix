@@ -7,6 +7,8 @@ before_filter :require_user
 
   def show
     @video = Video.find(params[:id])
+    @reviews = @video.reviews
+    binding.pry
   end
 
   def search 

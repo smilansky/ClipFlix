@@ -22,8 +22,7 @@ describe VideosController do
   describe "GET show" do
     context "passes authentication" do
       before :each do
-        user = User.create(fullname: 'joe', email: 'joe@example.com', password: 'password')
-        session[:user_id] = user.id
+        session[:user_id] = Fabricate(:user)
         @ter = Video.create(title: 'Terminator 2', description: 'Action Movie')
       end
 
@@ -31,6 +30,15 @@ describe VideosController do
         get :show, id: @ter
         expect(assigns(:video)).to eq(@ter)
       end  
+
+      it "sets @reviews to all of the reviews of a particular controller" do
+        review1 = Fabricate(:review, video: @ter)
+        review2 = Fabricate(:review, video: @ter)
+
+        get :show, id: @ter
+        expect(assigns[:reviews]).to match_array([review1, review2])
+
+      end
 
     end
 
