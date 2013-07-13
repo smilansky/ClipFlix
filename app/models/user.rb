@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  has_many :reviews, through: :videos, dependent: :destroy
+  has_many :reviews
 
   has_secure_password
 

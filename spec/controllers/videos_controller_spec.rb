@@ -26,7 +26,7 @@ describe VideosController do
         @ter = Video.create(title: 'Terminator 2', description: 'Action Movie')
       end
 
-      it "sets the @video variable to the requested video" do
+      it "sets the @video variable to the requested video if the user is" do
         get :show, id: @ter
         expect(assigns(:video)).to eq(@ter)
       end  
@@ -37,9 +37,12 @@ describe VideosController do
 
         get :show, id: @ter
         expect(assigns[:reviews]).to match_array([review1, review2])
-
       end
 
+     it "sets the @review variable" do
+      get :show, id:@ter
+      expect(assigns(:review)).to be_a_new(Review)
+     end
     end
 
     context "fails authentication" do
@@ -70,5 +73,5 @@ describe VideosController do
       post :search, search_term: "min"
       expect(response).to redirect_to root_path
     end
-  end  
+  end   
 end
