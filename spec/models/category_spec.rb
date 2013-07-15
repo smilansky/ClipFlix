@@ -8,6 +8,7 @@ describe Category do
   end
 
   it { should have_many(:videos)}
+  it { should validate_presence_of(:name) }
 
   describe "#recent_videos" do
     it "returns an empty array if the category has no videos" do
