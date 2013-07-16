@@ -11,7 +11,13 @@ class QueueItemsController < ApplicationController
     redirect_to my_queue_path 
   end
 
-  def new_queue_item_position
+  def destroy
+    QueueItem.find(params[:id]).destroy unless QueueItem.find(params[:id]).user != current_user
+    redirect_to my_queue_path
+  end
+
+  private
+    def new_queue_item_position
     current_user.queue_items.count + 1
   end
 
