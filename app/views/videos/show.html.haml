@@ -11,7 +11,7 @@
         .actions
           %a.btn.btn-primary(href="") Watch Now
           = if current_user.queue_items.where(video_id: @video).blank?
-            = button_to "+ My Queue", { :controller => "queue_items", :action => 'create', video: @video }, :method => "post", :class => "a btn"
+            = button_to "+ My Queue", { :controller => "queue_items", :action => 'create', video_id: @video.id }, :method => "post", :class => "a btn"
 %section.reviews.container
   .row
     .span10.offset1
