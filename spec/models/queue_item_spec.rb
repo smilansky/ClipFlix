@@ -4,6 +4,11 @@ describe QueueItem do
     it { should belong_to(:user)}
     it { should belong_to(:video)}
 
+    describe "GET index" do
+      it "should set @queue_items for authenticated users" do
+        
+    end
+
     describe "#video_title" do
       it "should return the queue item video's title" do
         video = Fabricate(:video, title: 'Futurama')
@@ -39,4 +44,6 @@ describe QueueItem do
         expect(queue_item1.category_name).to eq(category.name)
       end  
     end
+
+    describe 
 end
