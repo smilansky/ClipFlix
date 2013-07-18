@@ -101,4 +101,47 @@ describe QueueItemsController do
       end
     end
   end
+
+  describe "POST update_queue" do
+    context "valid parameters" do
+      it "redirects to the my queue page" do
+        current_user = Fabricate(:user)
+        session[:user_id] = current_user.id
+        video_queue_item = Fabricate(:queue_item, user: current_user, order: 1)
+        video_queue_item1 = Fabricate(:queue_item, user: current_user, order: 2)
+     
+        post :update_queue, queue_items: [{id: video_queue_item.id, order: 2}, {id: video_queue_item1.id, order: 1}]
+        expect(response).to redirect_to my_queue_path
+      end
+
+      it "reorders the queue_items" do
+        current_user = Fabricate(:user)
+        session[:user_id] = current_user.id
+        video_queue_item = Fabricate(:queue_item, user: current_user, order: 1)
+        video_queue_item1 = Fabricate(:queue_item, user: current_user, order: 2)
+     
+        post :update_queue, queue_items: [{id: video_queue_item.id, order: 2}, {id: video_queue_item1.id, order: 1}]
+        expect(current_user.queue_items).to eq([video_queue_item1, video_queue_item])
+      end
+
+      # it "normalizes the position numbers" do
+      #   current_user = Fabricate(:user)
+      #   session[:user_id] = current_user.id
+      #   video_queue_item = Fabricate(:queue_item, user: current_user, order: 1)
+      #   video_queue_item1 = Fabricate(:queue_item, user: current_user, order: 2)
+     
+      #   post :update_queue, queue_items: [{id: video_queue_item.id, order: 3}, {id: video_queue_item1.id, order: 1}]
+      #   video_queue_item.reload
+      #   expect(video_queue_item.order).to eq(2)
+      # end
+      
+    end
+    context "invalid parameters" do
+      it "does not update the order of the queue_items"
+      it "renders the my queue template"
+    end  
+    context "unauthorized user" do
+        it " redirects to the root path"
+    end
+  end
 end

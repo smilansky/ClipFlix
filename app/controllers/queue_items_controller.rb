@@ -16,6 +16,16 @@ class QueueItemsController < ApplicationController
     redirect_to my_queue_path
   end
 
+  def update_queue
+    queue_items = params[:queue_items]
+    queue_items.each do |queue_item|
+      current_user.queue_items.find(queue_item["id"]).update_attributes(order: queue_item["order"])
+      binding.pry
+    end
+
+    redirect_to my_queue_path
+  end
+
   private
     def new_queue_item_position
     current_user.queue_items.count + 1
