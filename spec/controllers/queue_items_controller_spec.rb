@@ -84,12 +84,22 @@ describe QueueItemsController do
         expect(QueueItem.count).to eq(0)
       end
 
+      it "normalizes the remaining queue items" do
+        current_user = Fabricate(:user)
+        session[:user_id] = current_user.id
+        video_queue_item = Fabricate(:queue_item, user: current_user, position: 1)
+        video_queue_item1 = Fabricate(:queue_item, user: current_user, position: 2)
+
+        delete :destroy, id: video_queue_item.id
+        expect(video_queue_item1.reload.position).to eq(1)
+      end
+
       it "removes a queue item from the queue associated with the signed in user" do
         user = Fabricate(:user)
         video2 = Fabricate(:video)
         video2_queue_item = Fabricate(:queue_item, video_id: video2.id, user_id: user.id)
 
-        delete :destroy, id: video.id
+        delete :destroy, id: video2_queue_item.id
         expect(user.queue_items.count).to eq(1)
       end
     end
@@ -154,7 +164,7 @@ describe QueueItemsController do
         video_queue_item1 = Fabricate(:queue_item, user: current_user, position: 2)
   
         post :update_queue, queue_items: [{id: video_queue_item.id, position: "" }, {id: video_queue_item1.id, position: 2}]
-        expect(flash[:errors]).to be_present
+        expect(flash[:error]).to be_present
       end
       
       it "does not update the position of the queue_items" do
@@ -163,15 +173,33 @@ describe QueueItemsController do
         video_queue_item = Fabricate(:queue_item, user: current_user, position: 1)
         video_queue_item1 = Fabricate(:queue_item, user: current_user, position: 2)
   
-        post :update_queue, queue_items: [{id: video_queue_item.id, position: 3.4 }, {id: video_queue_item1.id, position: 2}]
-        video_queue_item.reload
-        expect(video_queue_item.position).to eq(1)
+        post :update_queue, queue_items: [{id: video_queue_item.id, position: 3 }, {id: video_queue_item1.id, position: 1.2}]
+        expect(video_queue_item1.reload.position).to eq(2)
       end
       
 
     end  
     context "unauthorized user" do
-        it " redirects to the root path"
+        it " redirects to the root path" do
+          video_queue_item = Fabricate(:queue_item)
+          video_queue_item1 = Fabricate(:queue_item)
+  
+          post :update_queue, queue_items: [{ id: video_queue_item.id}, { id: video_queue_item1.id}]
+          expect(response).to redirect_to root_path
+        end  
     end
+
+    context "with queueitems that do not belong to the current user" do
+      it "does not change the queue items" do
+        current_user = Fabricate(:user)
+        user = Fabricate(:user)
+        session[:user_id] = current_user.id
+        video_queue_item = Fabricate(:queue_item, user: user, position: 1)
+        video_queue_item1 = Fabricate(:queue_item, user: user, position: 2)
+  
+        post :update_queue, queue_items: [{id: video_queue_item.id, position: 3 }, {id: video_queue_item1.id, position: 1}]
+        expect(video_queue_item1.reload.position).to eq(2)
+      end
+    end  
   end
 end
