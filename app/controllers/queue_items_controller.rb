@@ -18,12 +18,18 @@ class QueueItemsController < ApplicationController
 
   def update_queue
     queue_items = params[:queue_items]
-    queue_items.each do |queue_item|
-      current_user.queue_items.find(queue_item["id"]).update_attributes(order: queue_item["order"])
-      binding.pry
+    queue_items.each do |queue_item_data|
+      queue_item = QueueItem.find(queue_item_data["id"])
+      queue_item.update_attributes(position: queue_item_data["position"])
     end
 
+    current_user.queue_items.each_with_index do |queue_item, index|
+      queue_item.update_attributes(position: index + 1)
+    end
+   
     redirect_to my_queue_path
+
+
   end
 
   private
@@ -36,6 +42,6 @@ class QueueItemsController < ApplicationController
   end
 
   def queue_video(video)
-    QueueItem.create(video: video, user: current_user, order: new_queue_item_position) unless current_user_queued_video?(video)
+    QueueItem.create(video: video, user: current_user, position: new_queue_item_position) unless current_user_queued_video?(video)
   end  
 end
