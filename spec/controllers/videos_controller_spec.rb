@@ -40,8 +40,9 @@ describe VideosController do
       end
 
      it "sets the @review variable" do
+      review1 = Fabricate(:review, video: @ter)
       get :show, id:@ter
-      expect(assigns(:review)).to be_a_new(Review)
+      expect(assigns(:reviews)).to eq([review1])
      end
     end
 
