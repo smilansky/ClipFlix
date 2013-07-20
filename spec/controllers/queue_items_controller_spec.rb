@@ -4,28 +4,23 @@ describe QueueItemsController do
   describe "GET index" do
 
     it "sets @queue_items to @queue_items of currently logged in user" do
-      daniel = Fabricate(:user)
-      session[:user_id] = daniel.id
-      queue_item1 = Fabricate(:queue_item, user: daniel)
-      queue_item2 = Fabricate(:queue_item, user: daniel)
+      set_current_user
+      queue_item1 = Fabricate(:queue_item, user: current_user)
+      queue_item2 = Fabricate(:queue_item, user: current_user)
       
       get :index
 
       expect(assigns(:queue_items)).to match_array([queue_item1, queue_item2])
     end
-    it "redirects to the root path for unauthenticate users" do
-      get :index
-      expect(response).to redirect_to root_path
+    it_behaves_like "require_sign_in" do
+      let(:action) { get :index }
     end
   end
 
   describe "POST create" do
     let(:video) { Fabricate(:video) }
-    let(:current_user) { Fabricate(:user) }
     context "authenticated user" do
-      before do
-        session[:user_id] = current_user.id
-      end
+      before { set_current_user }
       it "redirects to the my_queue page" do
         post :create, video_id: video.id, user_id: current_user.id
         expect(response).to redirect_to my_queue_path
@@ -61,19 +56,17 @@ describe QueueItemsController do
       end
      end 
     context "unauthenticated user" do
-      it "redirects to the root path for unauthenticated users" do
-        post :create, video_id: 1
-        expect(response).to redirect_to root_path
+      it_behaves_like "require_sign_in" do
+        let(:action) { post :create, video_id: 1 }
       end  
     end
   end
 
   describe "DELETE destroy" do
     context "authenticated user" do
-      let(:current_user) { Fabricate(:user) }
       let(:video) { Fabricate(:video) }
       let(:video_queue_item) { Fabricate(:queue_item, video_id: video.id, user_id: current_user.id) }
-      before { session[:user_id] = current_user.id}
+      before { set_current_user }
       it "redirects to the my queue page" do
         delete :destroy, id: video_queue_item.id
         expect(response).to redirect_to my_queue_path
@@ -85,8 +78,6 @@ describe QueueItemsController do
       end
 
       it "normalizes the remaining queue items" do
-        current_user = Fabricate(:user)
-        session[:user_id] = current_user.id
         video_queue_item = Fabricate(:queue_item, user: current_user, position: 1)
         video_queue_item1 = Fabricate(:queue_item, user: current_user, position: 2)
 
@@ -105,20 +96,18 @@ describe QueueItemsController do
     end
     
     context "unauthenticated user" do
-      it "redirects to the root_path" do
-        delete :destroy, id: 1
-        expect(response).to redirect_to root_path
+      it_behaves_like "require_sign_in" do
+        let(:action) { delete :destroy, id: 1 }
       end
     end
   end
 
   describe "POST update_queue" do
     context "valid parameters" do
-        let(:current_user) { Fabricate(:user) }
         let(:video) { Fabricate(:video) }
         let(:video_queue_item) { Fabricate(:queue_item, user: current_user, position: 1, video: video) }
         let(:video_queue_item1) { Fabricate(:queue_item, user: current_user, position: 2, video: video) }
-        before { session[:user_id] = current_user.id }
+        before { set_current_user }
       it "redirects to the my queue page" do     
         post :update_queue, queue_items: [{id: video_queue_item.id, position: 2}, {id: video_queue_item1.id, position: 1}]
         expect(response).to redirect_to my_queue_path
@@ -138,11 +127,10 @@ describe QueueItemsController do
     end
 
     context "invalid parameters" do
-        let(:current_user) { Fabricate(:user) }
         let(:video) { Fabricate(:video) }
         let(:video_queue_item) { Fabricate(:queue_item, user: current_user, position: 1, video: video) }
         let(:video_queue_item1) { Fabricate(:queue_item, user: current_user, position: 2, video: video) }
-        before { session[:user_id] = current_user.id }
+        before { set_current_user}
         
       it "redirects to the my queue template" do  
         post :update_queue, queue_items: [{id: video_queue_item.id, position: "" }, {id: video_queue_item1.id, position: 2}]
@@ -162,20 +150,17 @@ describe QueueItemsController do
 
     end  
     context "unauthorized user" do
-        it " redirects to the root path" do
-          video_queue_item = Fabricate(:queue_item)
-          video_queue_item1 = Fabricate(:queue_item)
-  
-          post :update_queue, queue_items: [{ id: video_queue_item.id}, { id: video_queue_item1.id}]
-          expect(response).to redirect_to root_path
+        let(:video_queue_item) { Fabricate(:queue_item) }
+        let(:video_queue_item1) { Fabricate(:queue_item) }
+        it_behaves_like "require_sign_in" do 
+          let(:action) {post :update_queue, queue_items: [{ id: video_queue_item.id}, { id: video_queue_item1.id}] }
         end  
     end
 
     context "with queueitems that do not belong to the current user" do
       it "does not change the queue items" do
-        current_user = Fabricate(:user)
+        set_current_user  
         user = Fabricate(:user)
-        session[:user_id] = current_user.id
         video_queue_item = Fabricate(:queue_item, user: user, position: 1)
         video_queue_item1 = Fabricate(:queue_item, user: user, position: 2)
   

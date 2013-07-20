@@ -16,9 +16,8 @@ describe UsersController do
 
   describe "POST create" do
     context "with valid parameters" do
-      before :each do
-        post :create, user: { fullname: "Bob", email: "bob@bob.com", password: "bob" }
-      end
+      before { post :create, user: { fullname: "Bob", email: "bob@bob.com", password: "bob" } }
+
       it "saves the user in the database with valid parameters" do
         User.first.fullname.should == "Bob"
         User.first.email.should == "bob@bob.com"
@@ -28,10 +27,9 @@ describe UsersController do
         expect(response).to redirect_to home_path
       end
     end  
+    
     context "with invalid parameters" do
-      before :each do
-        post :create, user: { fullname: "Bob", email: "bob@bob.com" }
-      end
+    before {  post :create, user: { fullname: "Bob", email: "bob@bob.com" } }
       it "does not save the new message in the database" do
         expect(User.count).to eq(0)
       end

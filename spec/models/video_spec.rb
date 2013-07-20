@@ -17,35 +17,30 @@ require 'spec_helper'
     end
 
     describe "search_by_title" do
+      
+      context "all" do
+        let(:com) { Video.create(title: 'Futures', description: 'awesome') }
+        let(:futurama) { Video.create(title: 'Futurama', description: 'great', created_at: 1.day.ago) }
 
-      it "returns an empty array if there is no match" do
-        com = Video.create(title: 'Children of Men', description: 'Set in the 25th century, the story centers around a man and a woman who rebel against their rigidly controlled society.')
-        futurama = Video.create(title: 'Futurama', description: 'American animated science fiction sitcom.')
-        expect(Video.search_by_title('Batman')).to eq([])
-      end 
+        it "returns an empty array if there is no match" do
+          expect(Video.search_by_title('Batman')).to eq([])
+        end 
 
-      it "returns an array of one video for an exact match" do
-        com = Video.create(title: 'Children of Men', description: 'Set in the 25th century, the story centers around a man and a woman who rebel against their rigidly controlled society.')
-        futurama = Video.create(title: 'Futurama', description: 'American animated science fiction sitcom.')
-        expect(Video.search_by_title('Futurama')).to eq([futurama])
-      end
+        it "returns an array of one video for an exact match" do
+          expect(Video.search_by_title('Futurama')).to eq([futurama])
+        end
 
-      it "returns an array of one video for a partial match" do
-        com = Video.create(title: 'Children of Men', description: 'Set in the 25th century, the story centers around a man and a woman who rebel against their rigidly controlled society.')
-        futurama = Video.create(title: 'Futurama', description: 'American animated science fiction sitcom.')
-        expect(Video.search_by_title('Fu')).to eq([futurama])
-      end
+        it "returns an array of one video for a partial match" do
+          expect(Video.search_by_title('Fu')).to eq([futurama])
+        end
 
-      it "returns an array of all matches" do
-        fullh = Video.create(title: 'Full House', description: 'American sitcom television series.')
-        futurama = Video.create(title: 'Futurama', description: 'American animated science fiction sitcom.', created_at: 1.day.ago)
-        expect(Video.search_by_title('Fu')).to eq([fullh, futurama])
-      end
+        it "returns an array of all matches" do
+          expect(Video.search_by_title('Fu')).to eq([com, futurama])
+        end
 
-      it "returns an empty array for a search with an empty string" do
-        com = Video.create(title: 'Children of Men', description: 'Set in the 25th century, the story centers around a man and a woman who rebel against their rigidly controlled society.')
-        futurama = Video.create(title: 'Futurama', description: 'American animated science fiction sitcom.')
-        expect(Video.search_by_title("")).to eq([])
+        it "returns an empty array for a search with an empty string" do
+          expect(Video.search_by_title("")).to eq([])
+        end
       end
     end
 end
