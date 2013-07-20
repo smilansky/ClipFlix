@@ -12,6 +12,16 @@ class QueueItem < ActiveRecord::Base
     review == nil ? nil : review.rating
   end
 
+  def rating=(new_rating)
+    review = Review.where(user_id: user.id, video_id: video.id).first
+    if review == nil
+      review = Review.new(user_id: user.id, video_id: video.id, rating: new_rating)
+      review.save(validate: false)
+    else  
+      review.update_column(:rating, new_rating)
+    end
+  end
+
   def category_name
     category.name
   end
