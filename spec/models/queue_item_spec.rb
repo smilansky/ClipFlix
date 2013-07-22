@@ -3,12 +3,7 @@ require 'spec_helper'
 describe QueueItem do
     it { should belong_to(:user)}
     it { should belong_to(:video)}
-    it { should validate_numericality_of(:position).only_true}
-
-    describe "GET index" do
-      it "should set @queue_items for authenticated users" do
-        
-    end
+    it { should validate_numericality_of(:position).only_integer }
 
     describe "#video_title" do
       it "should return the queue item video's title" do
@@ -46,5 +41,37 @@ describe QueueItem do
       end  
     end
 
-    describe 
+
+  describe "#rating=" do
+        it "updates the rating for the queue_item video review" do
+        daniel = Fabricate(:user)
+        video = Fabricate(:video)
+        review = Review.create( content: "blah blach", rating: 1, user_id: daniel.id, video_id: video.id)
+        video_queue_item = Fabricate(:queue_item, video: video, user: daniel, position: 4)
+  
+        video_queue_item.rating = 2
+        expect(Review.first.rating).to eq(2)
+      end
+
+      it "clears the rating of a review if the review is present" do
+        daniel = Fabricate(:user)
+        video = Fabricate(:video)
+        review = Review.create( content: "blah blach", rating: 1, user_id: daniel.id, video_id: video.id)
+        video_queue_item = Fabricate(:queue_item, video: video, user: daniel, position: 4)
+  
+        video_queue_item.rating = nil
+        expect(Review.first.rating).to be_nil     
+      end
+
+      it "creates a new rating for a queue_item video that has no review" do
+        daniel = Fabricate(:user)
+        video = Fabricate(:video)
+        review = Review.create( content: "blah blach", user_id: daniel.id, video_id: video.id)
+        video_queue_item = Fabricate(:queue_item, video: video, user: daniel, position: 4)
+  
+        video_queue_item.rating = 1
+        expect(Review.first.rating).to eq(1) 
+      end
+  end
+
 end

@@ -4,10 +4,9 @@ describe ReviewsController do
   describe "POST create" do
     let(:video) { Fabricate(:video) }
     context "authenticated user" do
-      let(:current_user) { Fabricate(:user) }
 
       before do
-        session[:user_id] = current_user.id
+        set_current_user
       end  
       context "valid parameters" do
         before { post :create, review: Fabricate.attributes_for(:review), video_id: video.id }
@@ -57,9 +56,8 @@ describe ReviewsController do
           post :create, review: Fabricate.attributes_for(:review), video_id: video.id
           expect(Review.count).to eq(0)
       end
-      it "redirects the user to the root path" do
-          post :create, review: Fabricate.attributes_for(:review), video_id: video.id
-          expect(response).to redirect_to root_path
+      it_behaves_like "require_sign_in" do
+          let(:action) { post :create, review: Fabricate.attributes_for(:review), video_id: video.id }
       end
     end  
   end  
