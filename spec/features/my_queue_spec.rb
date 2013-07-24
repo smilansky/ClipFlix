@@ -8,12 +8,7 @@ feature 'My_queue' do
     futurama = Fabricate(:video, title: 'Futurama', category: movies )
     monk = Fabricate(:video, title: 'Monk', category: movies)
 
-    daniel = Fabricate(:user)
-    visit sign_in_path
-    fill_in "email", with: daniel.email
-    fill_in "password", with: daniel.password
-    click_button "Sign in"
-    page.should have_content daniel.fullname
+    sign_in
     
     find("a[href='/videos/#{xmen.id}']").click
     page.should have_content(xmen.title)
