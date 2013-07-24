@@ -1,0 +1,36 @@
+%article.video
+  .container
+    .row
+      .video_large_cover.span7.offset1
+        %img(src="/tmp/monk_large.jpg")
+      .video_info.span3
+        %header
+          %h3= @video.title
+          %span Rating: 4.5/5.0
+        %p= @video.description
+        .actions
+          %a.btn.btn-primary(href="") Watch Now
+          = link_to " + My Queue", { :controller => "queue_items", :action => 'create', video_id: @video.id }, :method => "post", :class => "btn" if current_user.queue_items.where(video_id: @video).blank?
+%section.reviews.container
+  .row
+    .span10.offset1
+      = form_for [@video, Review.new] do |f|
+        %fieldset
+          %label Rate This Video
+          = f.select :rating, options_for_select([5,4,3,2,1].map {|number| [pluralize(number, "Star"), number]})
+          %label Write Review
+          = f.text_area :content, rows: 6, class: "span6"
+        %fieldset.actions.clearfix
+          %input(type="submit" value="Submit" class="btn")
+          = link_to "Cancel", @video
+      %header
+        %h3 User Reviews (#{@reviews.count})
+      %ul
+        - @reviews.each do |review|
+          %article.review
+            %li.row
+              .span2
+                %span Rating: "#{review.rating}" / 5
+                %p= link_to "\"#{review.user.fullname}\"", review.user
+              .span8
+                %p= "#{review.content}"
