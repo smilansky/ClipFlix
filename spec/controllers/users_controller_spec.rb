@@ -42,5 +42,21 @@ describe UsersController do
         expect(assigns(:user)).to be_a_new(User)
       end
     end
-  end  
+  end 
+
+  describe "GET show" do 
+    it "assigns @user" do
+      daniel = Fabricate(:user)
+      get :show, id: daniel.id
+
+      expect(assigns(:user)).to eq(daniel)
+    end
+    
+    it "renders the correct correct user's profile page" do
+      daniel = Fabricate(:user)
+      get :show, id: daniel.id
+
+      expect(response).to render_template daniel
+    end
+  end
 end
