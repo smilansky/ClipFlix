@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   has_many :reviews
   has_many :queue_items, order: :position
+  has_many :relationships
+  has_many :leaders, through: :relationships
 
   has_secure_password
 
