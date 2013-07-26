@@ -19,20 +19,20 @@ feature 'My_queue' do
     find("a[href='/videos/#{xmen.id}']").click
     page.should_not have_content('+ My Queue')
 
-    find("a[href='/home']").click
+    visit home_path 
     
     find("a[href='/videos/#{futurama.id}']").click
     click_link "+ My Queue"
     page.should have_content(futurama.title)
     
-    find("a[href='/home']").click
+    visit home_path
     find("a[href='/videos/#{monk.id}']").click
     click_link "+ My Queue"
     page.should have_content(monk.title)
    
     fill_in "queue_item_2", :with => 4
     fill_in "queue_item_1", :with => 5
-    click_link "Update Instant Queue"
+    click_button "Update Instant Queue"
 
     find_field("queue_item_1").value.should eq("3")
     find_field("queue_item_2").value.should eq("2")
