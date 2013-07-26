@@ -45,7 +45,13 @@ describe UsersController do
   end 
 
   describe "GET show" do 
+
+    it_behaves_like "require_sign_in" do
+      let(:action) { get :show, id: 4}
+    end
+
     it "assigns @user" do
+      set_current_user
       daniel = Fabricate(:user)
       get :show, id: daniel.id
 
@@ -53,6 +59,7 @@ describe UsersController do
     end
     
     it "renders the correct correct user's profile page" do
+      set_current_user
       daniel = Fabricate(:user)
       get :show, id: daniel.id
 

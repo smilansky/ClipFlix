@@ -9,13 +9,15 @@
         %th(width="20%") Followers
         %th(width="30%") Unfollow
     %tbody
-      - @leaders.each do |leader|
+      - @relationships.each do |relationship|
         %tr
           %td
-            %img(src="http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest('knwang@gmail.com'.downcase)}?s=40")
-            = link_to leader.fullname, leader
-          %td.extra-padding= leader.queue_items.count
-          %td.extra-padding= leader.relationships.count
+            %img(src="http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(relationship.leader.email.downcase)}?s=40")
+            = link_to relationship.leader.fullname, relationship.leader
+          %td.extra-padding= relationship.leader.queue_items.count
+          %td.extra-padding= relationship.leader.leading_relationships.count
           %td.extra-padding
-            = link_to "", method: :post do
+            = link_to relationship, method: :delete do
               %i.icon-remove
+
+
