@@ -29,5 +29,3 @@ rachel = User.create(fullname: 'Rachel', email: 'rmcooper11@email.mmc.edu', pass
 
 Review.create(user: daniel, video: southp, rating: 4, content: 'Amazing!')
 Review.create(user: daniel, video: southp, rating: 3, content: 'Amazing!')
-
-Relationship.create(user_id: daniel.id, leader_id: rachel.id)

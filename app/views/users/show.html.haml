@@ -5,7 +5,7 @@
         %header
           %img(src="http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(@user.email.downcase)}?s=40")
           %h2 #{@user.fullname}'s video collections (#{@user.queue_items.count})
-          = link_to "Follow", { :controller => "relationships", :action => 'create', leader_id: @user.id }, :method => "post", :class => "btn", unless @user = current_user 
+          = link_to "Follow", { :controller => "relationships", :action => 'create', leader_id: @user.id }, :method => "post", :class => "btn" unless @user = current_user || @user.relationships.where(user_id: current_user).exists?
         %table.table
           %thead
             %tr
