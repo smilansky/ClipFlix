@@ -10,24 +10,25 @@ feature 'My_queue' do
 
     sign_in
     
+    binding.pry
     find("a[href='/videos/#{xmen.id}']").click
     page.should have_content(xmen.title)
 
-    click_button "+ My Queue"
+    click_link "+ My Queue"
     page.should have_content(xmen.title)
     
     find("a[href='/videos/#{xmen.id}']").click
     page.should_not have_content('+ My Queue')
 
-    find("a[href='/home']").click
+    visit home_path 
     
     find("a[href='/videos/#{futurama.id}']").click
-    click_button "+ My Queue"
+    click_link "+ My Queue"
     page.should have_content(futurama.title)
     
-    find("a[href='/home']").click
+    visit home_path
     find("a[href='/videos/#{monk.id}']").click
-    click_button "+ My Queue"
+    click_link "+ My Queue"
     page.should have_content(monk.title)
    
     fill_in "queue_item_2", :with => 4

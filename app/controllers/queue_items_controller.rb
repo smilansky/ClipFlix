@@ -44,16 +44,11 @@ class QueueItemsController < ApplicationController
   def update_queue_items
     ActiveRecord::Base.transaction do
       queue_items = params[:queue_items]
-      queue_items.each do |queue_item_data|
-        queue_item = QueueItem.find(queue_item_data["id"])
-        # queue_item_review = Review.where(user_id: current_user.id, video_id: queue_item.video.id)
-        # if queue_item_review == []
-        #   queue_item_review = Review.create(video_id: queue_item.video.id, user_id: current_user.id, rating: queue_item_data["rating"], content: '') 
-        # else
-        #   queue_item_review.first.update_attributes(rating: queue_item_data["rating"])
-        # end
-
-        queue_item.update_attributes!(position: queue_item_data["position"], rating: queue_item_data["rating"]) unless queue_item.user != current_user
+      unless queue_items == nil
+        queue_items.each do |queue_item_data|
+          queue_item = QueueItem.find(queue_item_data["id"])
+          queue_item.update_attributes!(position: queue_item_data["position"], rating: queue_item_data["rating"]) unless queue_item.user != current_user
+        end
       end
     end
   end   

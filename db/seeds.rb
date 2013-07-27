@@ -25,6 +25,7 @@ Video.create(title: 'Monk', description: 'American comedy-drama detective myster
 Video.create(title: 'Futurama', description: 'American animated science fiction sitcom.', small_cover_url: '/tmp/futurama.jpg', category: tvdramas)
 
 daniel = User.create(fullname: 'Daniel', email: 'dsmilansky@gmail.com', password: 'bigdeal23')
+rachel = User.create(fullname: 'Rachel', email: 'rmcooper11@email.mmc.edu', password: 'rachel')
 
 Review.create(user: daniel, video: southp, rating: 4, content: 'Amazing!')
 Review.create(user: daniel, video: southp, rating: 3, content: 'Amazing!')

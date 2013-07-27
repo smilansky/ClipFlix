@@ -108,6 +108,7 @@ describe QueueItemsController do
         let(:video_queue_item) { Fabricate(:queue_item, user: current_user, position: 1, video: video) }
         let(:video_queue_item1) { Fabricate(:queue_item, user: current_user, position: 2, video: video) }
         before { set_current_user }
+
       it "redirects to the my queue page" do     
         post :update_queue, queue_items: [{id: video_queue_item.id, position: 2}, {id: video_queue_item1.id, position: 1}]
         expect(response).to redirect_to my_queue_path
