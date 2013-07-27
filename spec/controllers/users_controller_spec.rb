@@ -27,6 +27,21 @@ describe UsersController do
         expect(response).to redirect_to home_path
       end
     end  
+
+    context "email sending" do
+      before { post :create, user: { fullname: "Bob", email: "bob@bob.com", password: "bob" } }
+      it "sends out the email" do
+        ActionMailer::Base.deliveries.should_not be_empty
+      end
+      it "sends to the right recipient" do
+        message = ActionMailer::Base.deliveries.last
+        message.to.should == [User.first.email]
+      end
+      it "has the right content" do
+        message = ActionMailer::Base.deliveries.last
+        message.body.should include('Welcome to MyFlix')
+      end
+    end
     
     context "with invalid parameters" do
     before {  post :create, user: { fullname: "Bob", email: "bob@bob.com" } }
