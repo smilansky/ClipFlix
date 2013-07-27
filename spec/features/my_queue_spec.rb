@@ -10,6 +10,7 @@ feature 'My_queue' do
 
     sign_in
     
+    binding.pry
     find("a[href='/videos/#{xmen.id}']").click
     page.should have_content(xmen.title)
 
