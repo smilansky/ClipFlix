@@ -29,18 +29,27 @@ describe UsersController do
     end  
 
     context "email sending" do
-      before { post :create, user: { fullname: "Bob", email: "bob@bob.com", password: "bob" } }
-      it "sends out the email" do
+      after { ActionMailer::Base.deliveries.clear }
+      it "sends out the email with valid inputs" do
+        post :create, user: { fullname: "Bob", email: "bob@bob.com", password: "bob" }
         ActionMailer::Base.deliveries.should_not be_empty
       end
       it "sends to the right recipient" do
+        post :create, user: { fullname: "Bob", email: "bob@bob.com", password: "bob" }
         message = ActionMailer::Base.deliveries.last
         message.to.should == [User.first.email]
       end
       it "has the right content" do
+        post :create, user: { fullname: "Bob", email: "bob@bob.com", password: "bob" }
         message = ActionMailer::Base.deliveries.last
         message.body.should include('Welcome to MyFlix')
       end
+
+      it "does not send out email with invalid inputs" do
+        post :create, user: { email: "bob@bob.com", password: "bob" }
+        ActionMailer::Base.deliveries.should be_empty
+      end
+
     end
     
     context "with invalid parameters" do
