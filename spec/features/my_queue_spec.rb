@@ -9,8 +9,7 @@ feature 'My_queue' do
     monk = Fabricate(:video, title: 'Monk', category: movies)
 
     sign_in
-    
-    binding.pry
+
     find("a[href='/videos/#{xmen.id}']").click
     page.should have_content(xmen.title)
 
