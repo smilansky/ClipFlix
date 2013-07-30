@@ -14,8 +14,6 @@ class User < ActiveRecord::Base
 
   before_create :generate_token
 
-  attr_accessible :token
-
   def normalize_queue_items
     queue_items.each_with_index do |queue_item, index|
       queue_item.update_attributes(position: index + 1)
