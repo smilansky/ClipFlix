@@ -11,6 +11,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
+    binding.pry
     if @user.save
       session[:user_id] = @user.id
       AppMailer.notify_on_new_user(@user).deliver
