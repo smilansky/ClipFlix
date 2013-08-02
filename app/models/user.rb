@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   has_many :leaders, through: :relationships
   has_many :following_relationships, class_name: "Relationship", foreign_key: :user_id
   has_many :leading_relationships, class_name: "Relationship", foreign_key: :leader_id
+  has_many :invites
 
   has_secure_password
 

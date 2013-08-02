@@ -2,29 +2,57 @@ require 'spec_helper'
 
 describe UsersController do
   describe "GET new" do
-    it "sets @user to a new user if not logged in" do
-      get :new
-      expect(assigns(:user)).to be_a_new(User)
-    end  
+    context "without token" do
+      it "sets @user to a new user if not logged in" do
+        get :new
+        expect(assigns(:user)).to be_a_new(User)
+      end  
+    end
 
-    it "redirects to the home path if logged in" do
-      session[:user_id] = Fabricate(:user).id
-      get :new
-      expect(response).to redirect_to home_path
+    context "with token" do
+      it "sets @invite" do
+        invite = Fabricate(:invite, email: "email@example.com", name: "mike", token: '54321')
+        get :new, format: invite.token
+        expect(assigns[:invite]).to eq(invite)
+      end
+
+      it "sets @user with parameters from the corresponding invite token" do
+        invite = Fabricate(:invite, email: "email@example.com", name: "mike", token: '54321')
+        get :new, format: invite.token
+        expect(assigns(:user).email).to eq('email@example.com')
+      end
     end
   end
 
   describe "POST create" do
     context "with valid parameters" do
-      before { post :create, user: { fullname: "Bob", email: "bob@bob.com", password: "bob" } }
-
-      it "saves the user in the database with valid parameters" do
+      it "saves the user in the database" do
+        post :create, user: { fullname: "Bob", email: "bob@bob.com", password: "bob" } 
         User.first.fullname.should == "Bob"
         User.first.email.should == "bob@bob.com"
       end
 
       it "redirects to the home_path" do
+        post :create, user: { fullname: "Bob", email: "bob@bob.com", password: "bob" } 
         expect(response).to redirect_to home_path
+      end
+
+      context "with token" do      
+        it "creates a leader relationship with the user that invited" do
+          daniel = Fabricate(:user)
+          invite = Fabricate(:invite, email: "email@example.com", name: "mike", token: '54321', user_id: daniel.id)
+          
+          post :create, user: { fullname: "Bob", email: "bob@bob.com", password: "bob" }, invite_user_id: daniel.id
+          expect(Relationship.first.leader_id).to eq(2)
+        end
+        
+        it "created a following relationship with the user that invited" do
+          daniel = Fabricate(:user)
+          invite = Fabricate(:invite, email: "email@example.com", name: "mike", token: '54321', user_id: daniel.id)
+          
+          post :create, user: { fullname: "Bob", email: "bob@bob.com", password: "bob" }, invite_user_id: daniel.id
+          expect(Relationship.where(id: 2).first.leader_id).to eq(1)
+        end
       end
     end  
 

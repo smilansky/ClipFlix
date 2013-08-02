@@ -5,11 +5,12 @@
         %header
           %h1 Invite a friend to join MyFlix!
         %fieldset
-          = label_tag :friends_name, "Friend's Name"
-          = text_field_tag :friends_name
-          = label_tag :friends_email, "Friend's Email address"
-          = text_field_tag :friends_email
-          = label_tag :invitation_message, "Invitation Message"
-          = text_field_tag :invitation_message, "Please join this reall cool site!", class: "span4"
+          = label_tag :name, "Friend's Name"
+          = text_field_tag :name
+          = label_tag :email, "Friend's Email address"
+          = text_field_tag :email
+          = label_tag :message, "Invitation Message"
+          = text_field_tag :message, "Please join this reall cool site!", class: "span4"
+          = hidden_field_tag "user_id", current_user.id
         %fieldset.action
           %input(type="submit" value="Send Invitation" class="btn")

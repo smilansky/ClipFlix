@@ -4,6 +4,7 @@ feature 'Reset Password' do
   background do
     clear_emails
   end
+  
   scenario 'user can reset their password' do
     daniel = Fabricate(:user, email: 'test@example.com', password: "old_pass")
     sign_in(daniel)
