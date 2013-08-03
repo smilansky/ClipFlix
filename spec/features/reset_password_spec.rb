@@ -28,5 +28,6 @@ feature 'Reset Password' do
 
     click_button "Sign in"
     page.should have_content daniel.fullname
+    clear_emails
   end
 end

@@ -19,6 +19,10 @@ def sign_in(a_user=nil)
   click_button "Sign in"
 end
 
- def last_email
-    ActionMailer::Base.deliveries.last
-  end
+def last_email
+  ActionMailer::Base.deliveries.last
+end
+
+def sign_out
+  visit sign_out_path
+end

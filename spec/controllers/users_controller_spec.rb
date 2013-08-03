@@ -8,18 +8,32 @@ describe UsersController do
         expect(assigns(:user)).to be_a_new(User)
       end  
     end
+  end
 
+  describe "GET new_with_token" do
     context "with token" do
-      it "sets @invite" do
-        invite = Fabricate(:invite, email: "email@example.com", name: "mike", token: '54321')
-        get :new, format: invite.token
-        expect(assigns[:invite]).to eq(invite)
+
+      it "renders the :new view template" do
+        invite = Fabricate(:invite, email: "email@example.com", name: "mike", message: "message", token: '54321')
+        get :new_with_token, token: invite.token
+        expect(response).to render_template :new      
       end
 
       it "sets @user with parameters from the corresponding invite token" do
-        invite = Fabricate(:invite, email: "email@example.com", name: "mike", token: '54321')
-        get :new, format: invite.token
+        invite = Fabricate(:invite, email: "email@example.com", name: "mike", message: "message", token: '54321')
+        get :new_with_token, token: invite.token
         expect(assigns(:user).email).to eq('email@example.com')
+      end
+
+      it "redirects to expired token page for invalid tokens" do
+        get :new_with_token, token: '12332'
+        expect(response).to redirect_to expired_token_path    
+      end
+
+      it "sets @invite_token" do
+        invite = Fabricate(:invite, email: "email@example.com", name: "mike", message: "message", token: '54321')
+        get :new_with_token, token: invite.token
+        expect(assigns(:invite_token)).to eq(invite.token)
       end
     end
   end
@@ -38,20 +52,28 @@ describe UsersController do
       end
 
       context "with token" do      
-        it "creates a leader relationship with the user that invited" do
+        it "has the user follow the user that invited" do
           daniel = Fabricate(:user)
-          invite = Fabricate(:invite, email: "email@example.com", name: "mike", token: '54321', user_id: daniel.id)
+          invite = Fabricate(:invite, email: "bob@bob.com", name: "mike", message: "message", token: '54321', user_id: daniel.id)
           
-          post :create, user: { fullname: "Bob", email: "bob@bob.com", password: "bob" }, invite_user_id: daniel.id
-          expect(Relationship.first.leader_id).to eq(2)
+          post :create, user: { fullname: "Bob", email: "bob@bob.com", password: "bob" }, invite_token: invite.token
+          expect(Relationship.first.leader_id).to eq(1)
         end
         
         it "created a following relationship with the user that invited" do
           daniel = Fabricate(:user)
-          invite = Fabricate(:invite, email: "email@example.com", name: "mike", token: '54321', user_id: daniel.id)
+          invite = Fabricate(:invite, email: "bob@bob.com", name: "mike", message: "message", user_id: daniel.id)
           
-          post :create, user: { fullname: "Bob", email: "bob@bob.com", password: "bob" }, invite_user_id: daniel.id
-          expect(Relationship.where(id: 2).first.leader_id).to eq(1)
+          post :create, user: { fullname: "Bob", email: "bob@bob.com", password: "bob" }, invite_token: invite.token
+          expect(Relationship.where(id: 2).first.leader_id).to eq(2)
+        end
+
+        it "expires the invite upon acceptance" do
+          daniel = Fabricate(:user)
+          invite = Fabricate(:invite, email: "bob@bob.com", name: "mike", message: "message", user_id: daniel.id)
+          
+          post :create, user: { fullname: "Bob", email: "bob@bob.com", password: "bob" }, invite_token: invite.token
+          expect(Invite.first.token).to be_nil
         end
       end
     end  

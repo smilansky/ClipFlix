@@ -25,5 +25,8 @@ class User < ActiveRecord::Base
     self.token = SecureRandom.urlsafe_base64
   end
 
+  def follow(another_user)
+    following_relationships.create(leader_id: another_user.id) unless self.id == another_user.id
+  end
 end
 
