@@ -74,6 +74,6 @@ ActionMailer::Base.smtp_settings = {
   :authentication => :plain,
 }
 ActionMailer::Base.delivery_method = :smtp
-config.action_mailer.default_url_options = { :host => 'http://fathomless-coast-3489.herokuapp.com/' }
+config.action_mailer.default_url_options = { :host => 'fathomless-coast-3489.herokuapp.com' }
 
 end
