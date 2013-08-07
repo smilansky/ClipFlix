@@ -10,7 +10,7 @@ class InvitesController < ApplicationController
     @invite = Invite.new(params[:invite].merge!(user_id: current_user.id))
     if @user.blank?
       if @invite.save
-        AppMailer.send_invite(@invite).deliver
+        AppMailer.delay.send_invite(@invite)
         flash[:success] = "Your invite was sent!"
         redirect_to home_path
       else
