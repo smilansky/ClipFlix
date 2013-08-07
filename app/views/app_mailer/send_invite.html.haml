@@ -1,0 +1,4 @@
+%section.general
+%p You have been invited by "#{@invite.user.fullname}"
+%p= @invite.message
+%p= link_to "Click Here To Join MyFLIX!", register_with_token_url(@invite.token)

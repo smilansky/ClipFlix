@@ -1,15 +1,6 @@
 require 'spec_helper'
 
 describe SessionsController do
-  describe "GET new" do
-    it "redirects to the user to the home path if user is authenticated" do
-      set_current_user
-
-      get :new
-      expect(response).to redirect_to home_path
-    end  
-  end 
-
   describe "POST create" do 
     context "with valid credentials" do
       before :each do
