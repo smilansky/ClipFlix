@@ -69,15 +69,4 @@ describe VideosController do
       let(:action) { post :search, search_term: "min" }
     end
   end   
-
-  describe "administrator access" do
-
-    describe "GET new" do
-      it "sets @video" do
-        daniel = Fabricate(:user, admin: true)
-        get :new
-        expect(assigns(:video)).to be_a_new(:video)
-      end
-    end
-  end
 end

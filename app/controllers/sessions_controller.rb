@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
     user = User.find_by_email(params[:email])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect_to home_path, notice: "Welcome, you have signed in!"
+      redirect_to current_user.admin? ? admin_add_video_path : home_path, notice: "Welcome, you have signed in!"
     else
       flash[:error] = "There is something wrong with your username or password"
       redirect_to sign_in_path
