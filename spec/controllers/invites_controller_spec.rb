@@ -28,12 +28,12 @@ describe InvitesController do
     
     context "with valid parameters" do
       after { ActionMailer::Base.deliveries.clear }
-      it "should redirect to the home page" do
+      it "redirects to the home page" do
         post :create, invite: { email: 'email@example.com', name: 'jason', message: 'sign up' }
         expect(response).to redirect_to home_path
       end
       
-      it "should create an invite" do
+      it "creates an invite" do
         post :create, invite: { email: 'email@example.com', name: 'jason', message: 'sign up' }
         expect(Invite.count).to eq(1)
       end
