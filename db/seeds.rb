@@ -10,9 +10,6 @@ tvcomedies = Category.create(name: 'TV Comedies')
 tvdramas = Category.create(name: 'TV Dramas')
 realitytv = Category.create(name: 'Reality TV')
 
-User.first.admin = true
-
-
 # Video.create(title: 'Family Guy', description: 'American adult animated sitcom.', small_cover_url: '/tmp/family_guy.jpg', category: tvcomedies)
 # Video.create(title: 'South Park', description: ' American adult animated sitcom.', small_cover_url: '/tmp/south_park.jpg', category: tvcomedies)
 # Video.create(title: 'Futurama', description: 'American animated science fiction sitcom.', small_cover_url: '/tmp/futurama.jpg', category: tvcomedies)
