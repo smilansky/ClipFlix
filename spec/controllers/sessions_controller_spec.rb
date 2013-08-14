@@ -3,21 +3,28 @@ require 'spec_helper'
 describe SessionsController do
   describe "POST create" do 
     context "with valid credentials" do
-      before :each do
-        @bob = Fabricate(:user)
-        post :create, email: @bob.email, password: @bob.password
-      end
-
       it "sets the session id to the signed in user id" do
-        expect(session[:user_id]).to eq(@bob.id)
+        bob = Fabricate(:user)
+        post :create, email: bob.email, password: bob.password
+        expect(session[:user_id]).to eq(bob.id)
       end  
 
       it "redirects the user to the home path" do
+        bob = Fabricate(:user)
+        post :create, email: bob.email, password: bob.password
         expect(response).to redirect_to home_path
       end  
 
       it "sets the notice" do
+        bob = Fabricate(:user)
+        post :create, email: bob.email, password: bob.password
         expect(flash[:notice]).not_to be_blank
+      end
+
+      it "redirects to the add video page for admins" do
+        bob = Fabricate(:user, admin: true)
+        post :create, email: bob.email, password: bob.password
+        expect(response).to redirect_to admin_add_video_path
       end
     end
 
