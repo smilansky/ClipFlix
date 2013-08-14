@@ -6,7 +6,7 @@ CarrierWave.configure do |config|
       :aws_access_key_id      => ENV['AWSAccessKeyId'],                        # required
       :aws_secret_access_key  => ENV['AWSSecretKey'],                        # required
     }
-    config.fog_directory  = 'name_of_directory'                    # required
+    config.fog_directory  = 'myflixtertl'                    # required
   else
     config.storage = :file
     config.enable_processing = Rails.env.development?
