@@ -23,6 +23,14 @@ def sign_in(a_user=nil)
   click_button "Sign in"
 end
 
+def admin_sign_in(a_admin=nil)
+  admin = a_admin || Fabricate(:user, admin: true)
+  visit sign_in_path
+  fill_in "email", with: admin.email
+  fill_in "password", with: admin.password
+  click_button "Sign in"
+end
+
 def last_email
   ActionMailer::Base.deliveries.last
 end
