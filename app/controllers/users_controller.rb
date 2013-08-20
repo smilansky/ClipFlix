@@ -34,7 +34,6 @@ class UsersController < ApplicationController
   end
 
   def handle_stripe
-    binding.pry
     Stripe.api_key = ENV['STRIPE_SECRET_KEY']
 
     token = params[:stripeToken]
