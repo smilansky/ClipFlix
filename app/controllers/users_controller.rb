@@ -23,7 +23,6 @@ class UsersController < ApplicationController
       handle_stripe
       session[:user_id] = @user.id
       AppMailer.notify_on_new_user(@user).deliver
-      redirect_to home_path, notice: "Welcome, thank you for your payment!"
     else
       render :new
     end
@@ -34,20 +33,16 @@ class UsersController < ApplicationController
   end
 
   def handle_stripe
-    Stripe.api_key = ENV['STRIPE_SECRET_KEY']
-
     token = params[:stripeToken]
 
-    begin
-      charge = Stripe::Charge.create(
-        :amount => 999,
-        :currency => "usd",
-        :card => token,
-      )
-    rescue Stripe::CardError => e
-      flash[:error] = e.message
-      redirect_to register_path
-    end
+    charge = StripeWrapper::Charge.create(:amount => 999, :card => token)
+      if charge.successful?
+        flash[:success] = "Thank you for your generous support!"
+        redirect_to home_path
+      else
+        flash[:error] = charge.error_message
+        redirect_to register_path
+      end
   end
 
   private
