@@ -20,10 +20,9 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     if @user.save
       handle_invite
+      handle_stripe
       session[:user_id] = @user.id
       AppMailer.notify_on_new_user(@user).deliver
-      redirect_to home_path, notice: "Welcome!"
-
     else
       render :new
     end
@@ -31,6 +30,19 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+  end
+
+  def handle_stripe
+    token = params[:stripeToken]
+
+    charge = StripeWrapper::Charge.create(:amount => 999, :card => token)
+      if charge.successful?
+        flash[:success] = "Thank you for your generous support!"
+        redirect_to home_path
+      else
+        flash[:error] = charge.error_message
+        redirect_to register_path
+      end
   end
 
   private
