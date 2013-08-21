@@ -34,7 +34,7 @@ class UsersController < ApplicationController
 
   def handle_stripe
     token = params[:stripeToken]
-
+ 
     charge = StripeWrapper::Charge.create(:amount => 999, :card => token)
       if charge.successful?
         flash[:success] = "Thank you for your generous support!"
