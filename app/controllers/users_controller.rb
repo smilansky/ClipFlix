@@ -18,11 +18,18 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
-    if @user.save
-      handle_invite
-      handle_stripe
-      session[:user_id] = @user.id
-      AppMailer.notify_on_new_user(@user).deliver
+    if @user.valid?
+      charge = StripeWrapper::Charge.create(:amount => 999, :card => params[:stripeToken])
+      if charge.successful?
+        @user.save
+        handle_invite
+        session[:user_id] = @user.id
+        AppMailer.notify_on_new_user(@user).deliver
+        redirect_to home_path
+      else
+        flash[:error] = charge.error_message
+        render :new
+      end
     else
       render :new
     end
@@ -32,18 +39,6 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def handle_stripe
-    token = params[:stripeToken]
- 
-    charge = StripeWrapper::Charge.create(:amount => 999, :card => token)
-      if charge.successful?
-        flash[:success] = "Thank you for your generous support!"
-        redirect_to home_path
-      else
-        flash[:error] = charge.error_message
-        redirect_to register_path
-      end
-  end
 
   private
 
