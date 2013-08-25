@@ -25,6 +25,7 @@ class UsersController < ApplicationController
         handle_invite
         session[:user_id] = @user.id
         AppMailer.notify_on_new_user(@user).deliver
+        flash[:success] = 'Thank you for your generous payment. Welcome to MyFlix!'
         redirect_to home_path
       else
         flash[:error] = charge.error_message

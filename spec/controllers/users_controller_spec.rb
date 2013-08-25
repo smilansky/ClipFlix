@@ -76,6 +76,11 @@ describe UsersController do
         post :create, user: { fullname: "Bob", email: "bob@bob.com", password: "bob" }, invite_token: invite.token
         expect(Invite.first.token).to be_nil
       end
+
+      it "sets the flash success message" do
+        post :create, user: { fullname: "Bob", email: "bob@bob.com", password: "bob" } 
+        expect(flash[:success]).to be_present
+      end
     end  
 
     context "valid personal info and declined card" do
