@@ -21,7 +21,7 @@ module StripeWrapper
     end
 
     def error_message
-      response.error_message
+      response.message
     end
   end
 
