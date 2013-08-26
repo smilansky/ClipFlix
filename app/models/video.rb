@@ -11,4 +11,7 @@ class Video < ActiveRecord::Base
     search_term.blank? ? [] : where("title LIKE ?", "%#{search_term}%").order("created_at DESC")
   end
 
+  def decorator
+    VideoDecorator.new(self)
+  end
 end
