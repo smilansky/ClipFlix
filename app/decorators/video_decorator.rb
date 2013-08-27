@@ -5,11 +5,9 @@ class VideoDecorator
     @video = video
   end
 
-
-
   def rating_show
-    if @video.decorator.rating
-      return "{@video.decorator.rating}/5.0"
+    if rating
+      return "#{rating}/5.0"
     else
       return "N/A"
     end
@@ -20,7 +18,7 @@ class VideoDecorator
     @video.reviews.each do |review|
       rating_total += review.rating
     end
-
-   return (rating_total == 0)? nil : rating_total/@video.reviews.count
+    
+   return (rating_total == 0)? nil : @video.reviews.average(:rating).round
   end
 end
