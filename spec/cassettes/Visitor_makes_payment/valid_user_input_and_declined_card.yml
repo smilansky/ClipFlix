@@ -2,10 +2,10 @@
 http_interactions:
 - request:
     method: post
-    uri: https://api.stripe.com/v1/charges
+    uri: https://api.stripe.com/v1/customers
     body:
       encoding: US-ASCII
-      string: amount=999&currency=usd&card=tok_2Rlux6wBzLrU0W
+      string: card=tok_2TjIupsx0PG8d6&plan=stripe_plan&email=example%40example.com
     headers:
       Accept:
       - ! '*/*; q=0.5, application/xml'
@@ -22,7 +22,7 @@ http_interactions:
         Daniels-MacBook-Air.local 12.4.0 Darwin Kernel Version 12.4.0: Wed May  1
         17:57:12 PDT 2013; root:xnu-2050.24.15~1/RELEASE_X86_64 x86_64"}'
       Content-Length:
-      - '47'
+      - '68'
   response:
     status:
       code: 402
@@ -31,11 +31,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Sun, 25 Aug 2013 01:30:38 GMT
+      - Fri, 30 Aug 2013 06:56:44 GMT
       Content-Type:
       - application/json;charset=utf-8
       Content-Length:
-      - '152'
+      - '117'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -47,8 +47,7 @@ http_interactions:
     body:
       encoding: US-ASCII
       string: ! "{\n  \"error\": {\n    \"message\": \"Your card was declined.\",\n
-        \   \"type\": \"card_error\",\n    \"code\": \"card_declined\",\n    \"charge\":
-        \"ch_2RlumlAGRqF0Ot\"\n  }\n}\n"
+        \   \"type\": \"card_error\",\n    \"code\": \"card_declined\"\n  }\n}\n"
     http_version: 
-  recorded_at: Sun, 25 Aug 2013 01:30:38 GMT
+  recorded_at: Fri, 30 Aug 2013 06:56:44 GMT
 recorded_with: VCR 2.5.0
