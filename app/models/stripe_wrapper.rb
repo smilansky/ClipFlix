@@ -1,5 +1,5 @@
 module StripeWrapper
-  class Charge
+  class Customer
     attr_reader :response, :status
     def initialize(response, status)
       @response = response
@@ -9,7 +9,7 @@ module StripeWrapper
     def self.create(options={})
       StripeWrapper.set_api_key
       begin
-        response = Stripe::Charge.create(amount: options[:amount], currency: 'usd', card: options[:card])
+        response = Stripe::Customer.create(card: options[:card], plan: 'stripe_plan', email: options[:user].email)
         new(response, :success)
       rescue Stripe::CardError => e
         new(e, :error)
