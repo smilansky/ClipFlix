@@ -16,12 +16,5 @@ class Admin::VideosController < ApplicationController
       flash[:error] = "You must put in valid parameters to add this video."
       render :new
     end
-
-  end
-
-  private
-
-  def require_admin
-    ((redirect_to home_path) && (flash[:error] = "You are not authorized for this page.")) unless current_user.admin?
   end
 end
