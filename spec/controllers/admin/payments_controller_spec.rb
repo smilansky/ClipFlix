@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe Admin::PaymentsController do
   describe "GET index" do
-
     it_behaves_like "require_sign_in" do
       let(:action) { get :index }
     end
@@ -17,10 +16,9 @@ describe Admin::PaymentsController do
     it "sets @payments for admins" do
       payment = Fabricate(:payment)
       set_current_admin
+      get :index
 
       expect(assigns(:payments)).to eq([payment])
     end
-
-
   end
 end

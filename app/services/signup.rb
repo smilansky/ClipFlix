@@ -10,6 +10,7 @@ class Signup
     if @user.valid?
       customer = StripeWrapper::Customer.create(:user => @user, :card => stripe_token)
       if customer.successful?
+        @user.customer_id = customer.id
         @user.save
         handle_invite(invitation_token)
         AppMailer.notify_on_new_user(@user).deliver

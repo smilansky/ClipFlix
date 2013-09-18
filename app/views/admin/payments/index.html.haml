@@ -5,9 +5,9 @@
         %section.payment_history
           %ul.nav.nav-tabs
             %li.active
-              %a(href="") Recent Payments
+              %a(href="/admin/view_payments") Recent Payments
             %li
-              %a(href="/ui/admin_add_video") Add a New Video
+              %a(href="/admin/add_video") Add a New Video
           %table.table
             %thead
               %tr
@@ -19,6 +19,6 @@
               - @payments.each do |payment|
                 %tr
                   %td payment.user
-                  %td payment.email
-                  %td $9.99
-                  %td csdgw321s-ad3
+                  %td payment.user.email
+                  %td payment.amount
+                  %td payment.reference
