@@ -18,7 +18,7 @@
             %tbody
               - @payments.each do |payment|
                 %tr
-                  %td payment.user
-                  %td payment.user.email
-                  %td payment.amount
-                  %td payment.reference
+                  %td= payment.user.fullname
+                  %td= payment.user.email
+                  %td= "$#{payment.amount/100.to_d}"
+                  %td= payment.reference_id
