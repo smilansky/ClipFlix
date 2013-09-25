@@ -7,7 +7,7 @@
             %li.active
               %a(href="/admin/view_payments") Recent Payments
             %li
-              %a(href="/admin/add_video") Add a New Video
+              = link_to "Add a New Video", admin_add_video_path
           %table.table
             %thead
               %tr
@@ -20,5 +20,5 @@
                 %tr
                   %td= payment.user.fullname
                   %td= payment.user.email
-                  %td= "$#{payment.amount/100.to_d}"
+                  %td= number_to_currency(payment.amount / 100.0)
                   %td= payment.reference_id
