@@ -25,5 +25,9 @@ class User < ActiveRecord::Base
   def follow(another_user)
     following_relationships.create(leader_id: another_user.id) unless self.id == another_user.id
   end
+
+  def deactivate!
+    update_column(:active, false)
+  end
 end
 

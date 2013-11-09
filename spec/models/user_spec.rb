@@ -16,17 +16,26 @@ it "generates a random token" do
   expect(daniel.token).to be_present
 end
 
-describe "#follow" do
-  it "follows another user" do
-    daniel = Fabricate(:user)
-    bob = Fabricate(:user)
-    daniel.follow(bob)
-    expect(daniel.following_relationships.count).to eq(1)
+  describe "#follow" do
+    it "follows another user" do
+      daniel = Fabricate(:user)
+      bob = Fabricate(:user)
+      daniel.follow(bob)
+      expect(daniel.following_relationships.count).to eq(1)
+    end
+    it "does not follow one self" do
+      daniel = Fabricate(:user)
+      daniel.follow(daniel)
+      expect(daniel.following_relationships.count).to eq(0)
+    end
   end
-  it "does not follow one self" do
-    daniel = Fabricate(:user)
-    daniel.follow(daniel)
-    expect(daniel.following_relationships.count).to eq(0)
+
+  describe "deactivate!" do
+    it "deactivates an active user" do
+      daniel = Fabricate(:user, active: true)
+      daniel.deactivate!
+
+      expect(daniel.reload).not_to be_active
+    end
   end
-end
 end
