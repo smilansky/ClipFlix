@@ -26,6 +26,13 @@ describe StripeWrapper::Customer do
         user: daniel)
         response.should be_successful
       end
+
+      it "returns the customer id" do
+        daniel = Fabricate(:user)
+        response = StripeWrapper::Customer.create(card: token,
+        user: daniel)
+        expect(response.customer_id).to be_present
+      end
     end
 
     context "with invalid card", :vcr do

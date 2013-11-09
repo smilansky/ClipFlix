@@ -24,7 +24,7 @@ module StripeWrapper
       response.message
     end
 
-    def id
+    def customer_id
       response.id
     end
   end
