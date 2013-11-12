@@ -26,7 +26,7 @@ Myflix::Application.routes.draw do
   end
 
   mount StripeEvent::Engine => '/stripe_events'
-
+# 
   resources :relationships, only: [:create, :destroy]
   resources :categories, only: [:show] 
   resources :users, only: [:create, :show]
