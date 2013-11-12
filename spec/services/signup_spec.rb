@@ -3,9 +3,16 @@ require 'spec_helper'
 describe Signup do
   describe "#register_user" do
     context "valid personal info and valid card" do
-      let(:customer) { double(:customer, successful?: true) }
+      let(:customer) { double(:customer, successful?: true, customer_id: 'cus2232') }
       before { StripeWrapper::Customer.should_receive(:create).and_return(customer) }
       after { ActionMailer::Base.deliveries.clear }
+      
+      it "saves the customer_id from stripe" do
+        daniel = Fabricate.build(:user)
+        Signup.new(daniel).register_user('123', nil)
+        expect(User.first.customer_id).to eq('cus2232')
+      end
+
       it "saves the user in the database" do
         Signup.new(Fabricate.build(:user)).register_user('123', nil)
         expect(User.count).to eq(1)

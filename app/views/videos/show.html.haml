@@ -2,7 +2,7 @@
   .container
     .row
       .video_large_cover.span7.offset1
-        = image_tag @video.large_cover
+        %iframe{allowscriptaccess: "always", allowfullscreen: "true", frameborder: "0", height: "430", src: "//player.vimeo.com/video/#{@video.decorator.vimeo_id}", title: "#{@video.title}", width: "640"}
       .video_info.span3
         %header
           %h3= @video.title

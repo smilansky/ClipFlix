@@ -46,4 +46,14 @@ describe VideoDecorator do
       expect(VideoDecorator.new(video).rating_show).to eq("4/5.0")
     end
   end
+
+  describe "#video_id", :vcr do
+    it "returns the vimeo id of the video url" do
+      video = Fabricate(:video, video_url: "http://vimeo.com/343")
+
+      expect(VideoDecorator.new(video).vimeo_id).to eq("343")
+    end
+  end
+
+
 end

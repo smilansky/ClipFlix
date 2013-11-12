@@ -21,8 +21,12 @@ Myflix::Application.routes.draw do
   namespace :admin do
     get 'add_video', to: 'videos#new'
     resources :videos, only: [:create]
+    get 'view_payments', to: 'payments#index'
+    resources :payments, only: [:create]
   end
 
+  mount StripeEvent::Engine => '/stripe_events'
+# 
   resources :relationships, only: [:create, :destroy]
   resources :categories, only: [:show] 
   resources :users, only: [:create, :show]
@@ -42,3 +46,4 @@ Myflix::Application.routes.draw do
   get 'invite', to: 'invites#new'
   resources :invites, only: [:create]
 end
+

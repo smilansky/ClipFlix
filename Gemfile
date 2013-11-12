@@ -14,6 +14,8 @@ gem 'mini_magick'
 gem 'fog'
 gem 'stripe'
 gem 'figaro'
+gem 'stripe_event'
+gem 'ruby-oembed'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

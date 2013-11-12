@@ -23,6 +23,10 @@ module StripeWrapper
     def error_message
       response.message
     end
+
+    def customer_id
+      response.id
+    end
   end
 
   def self.set_api_key

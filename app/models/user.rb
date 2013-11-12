@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   has_many :following_relationships, class_name: "Relationship", foreign_key: :user_id
   has_many :leading_relationships, class_name: "Relationship", foreign_key: :leader_id
   has_many :invites
+  has_many :payments
 
   has_secure_password
 
@@ -23,6 +24,10 @@ class User < ActiveRecord::Base
 
   def follow(another_user)
     following_relationships.create(leader_id: another_user.id) unless self.id == another_user.id
+  end
+
+  def deactivate!
+    update_column(:active, false)
   end
 end
 

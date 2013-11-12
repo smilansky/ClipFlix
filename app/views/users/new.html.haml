@@ -23,6 +23,8 @@ Stripe.setPublishableKey("#{ENV['STRIPE_PUBLISHABLE_KEY']}");
             %label.control-label(for="credit-card-number") Credit Card Number
             .controls
               %input.span3#credit-card-number(type="text" data-stripe="number")
+
+            (Use '4242424242424242')  
           .control-group
             %label.control-label(for="security-code") Security Code
             .controls
