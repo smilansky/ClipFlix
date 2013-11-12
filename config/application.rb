@@ -9,6 +9,8 @@ if defined?(Bundler)
   # Bundler.require(:default, :assets, Rails.env)
 end
 
+config.assets.initialize_on_precompile = false
+
 module Myflix
   class Application < Rails::Application
     config.encoding = "utf-8"
