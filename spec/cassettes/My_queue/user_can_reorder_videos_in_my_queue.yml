@@ -1,0 +1,243 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://vimeo.com/api/oembed.json?url=http://vimeo.com/343
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache
+      Access-Control-Allow-Origin:
+      - ! '*'
+      Access-Control-Allow-Headers:
+      - X-Requested-With
+      Expires:
+      - Tue, 12 Nov 2013 05:34:36 GMT
+      Last-Modified:
+      - Tue, 12 Nov 2013 00:44:16 GMT
+      Etag:
+      - ! '"4152cbb93fd485f51b909c0abe2531ea42069e27"'
+      X-Ua-Compatible:
+      - IE=edge
+      X-Dns-Prefetch-Control:
+      - 'on'
+      Vary:
+      - Accept-Encoding
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Date:
+      - Tue, 12 Nov 2013 05:33:36 GMT
+      X-Varnish:
+      - '554718891'
+      Age:
+      - '0'
+      Via:
+      - 1.1 varnish
+      X-Varnish-Cache:
+      - '0'
+      Connection:
+      - close
+      X-Vserver:
+      - 10.90.128.146
+    body:
+      encoding: US-ASCII
+      string: ! '{"type":"video","version":"1.0","provider_name":"Vimeo","provider_url":"https:\/\/vimeo.com\/","title":"You
+        need more focus.","author_name":"starfire","author_url":"http:\/\/vimeo.com\/starfire","is_plus":"0","html":"<iframe
+        src=\"\/\/player.vimeo.com\/video\/343\" width=\"320\" height=\"240\" frameborder=\"0\"
+        title=\"You need more focus.\" webkitallowfullscreen mozallowfullscreen allowfullscreen><\/iframe>","width":320,"height":240,"duration":0,"description":"","thumbnail_url":"http:\/\/b.vimeocdn.com\/ts\/455\/500\/45550004_295.jpg","thumbnail_width":295,"thumbnail_height":221,"video_id":343}'
+    http_version: 
+  recorded_at: Tue, 12 Nov 2013 05:33:36 GMT
+- request:
+    method: get
+    uri: http://vimeo.com/api/oembed.json?url=http://vimeo.com/343
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache
+      Access-Control-Allow-Origin:
+      - ! '*'
+      Access-Control-Allow-Headers:
+      - X-Requested-With
+      Expires:
+      - Tue, 12 Nov 2013 05:34:36 GMT
+      Last-Modified:
+      - Tue, 12 Nov 2013 00:44:16 GMT
+      Etag:
+      - ! '"4152cbb93fd485f51b909c0abe2531ea42069e27"'
+      X-Ua-Compatible:
+      - IE=edge
+      X-Dns-Prefetch-Control:
+      - 'on'
+      Vary:
+      - Accept-Encoding
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Date:
+      - Tue, 12 Nov 2013 05:33:36 GMT
+      X-Varnish:
+      - '2038836358'
+      Age:
+      - '0'
+      Via:
+      - 1.1 varnish
+      X-Varnish-Cache:
+      - '0'
+      Connection:
+      - close
+      X-Vserver:
+      - 10.90.128.188
+    body:
+      encoding: US-ASCII
+      string: ! '{"type":"video","version":"1.0","provider_name":"Vimeo","provider_url":"https:\/\/vimeo.com\/","title":"You
+        need more focus.","author_name":"starfire","author_url":"http:\/\/vimeo.com\/starfire","is_plus":"0","html":"<iframe
+        src=\"\/\/player.vimeo.com\/video\/343\" width=\"320\" height=\"240\" frameborder=\"0\"
+        title=\"You need more focus.\" webkitallowfullscreen mozallowfullscreen allowfullscreen><\/iframe>","width":320,"height":240,"duration":0,"description":"","thumbnail_url":"http:\/\/b.vimeocdn.com\/ts\/455\/500\/45550004_295.jpg","thumbnail_width":295,"thumbnail_height":221,"video_id":343}'
+    http_version: 
+  recorded_at: Tue, 12 Nov 2013 05:33:36 GMT
+- request:
+    method: get
+    uri: http://vimeo.com/api/oembed.json?url=http://vimeo.com/343
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache
+      Access-Control-Allow-Origin:
+      - ! '*'
+      Access-Control-Allow-Headers:
+      - X-Requested-With
+      Expires:
+      - Tue, 12 Nov 2013 05:34:36 GMT
+      Last-Modified:
+      - Tue, 12 Nov 2013 00:44:16 GMT
+      Etag:
+      - ! '"4152cbb93fd485f51b909c0abe2531ea42069e27"'
+      X-Ua-Compatible:
+      - IE=edge
+      X-Dns-Prefetch-Control:
+      - 'on'
+      Vary:
+      - Accept-Encoding
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Date:
+      - Tue, 12 Nov 2013 05:33:36 GMT
+      X-Varnish:
+      - 554719093 554718891
+      Age:
+      - '1'
+      Via:
+      - 1.1 varnish
+      X-Varnish-Cache:
+      - '1'
+      Connection:
+      - close
+      X-Vserver:
+      - 10.90.128.146
+    body:
+      encoding: US-ASCII
+      string: ! '{"type":"video","version":"1.0","provider_name":"Vimeo","provider_url":"https:\/\/vimeo.com\/","title":"You
+        need more focus.","author_name":"starfire","author_url":"http:\/\/vimeo.com\/starfire","is_plus":"0","html":"<iframe
+        src=\"\/\/player.vimeo.com\/video\/343\" width=\"320\" height=\"240\" frameborder=\"0\"
+        title=\"You need more focus.\" webkitallowfullscreen mozallowfullscreen allowfullscreen><\/iframe>","width":320,"height":240,"duration":0,"description":"","thumbnail_url":"http:\/\/b.vimeocdn.com\/ts\/455\/500\/45550004_295.jpg","thumbnail_width":295,"thumbnail_height":221,"video_id":343}'
+    http_version: 
+  recorded_at: Tue, 12 Nov 2013 05:33:36 GMT
+- request:
+    method: get
+    uri: http://vimeo.com/api/oembed.json?url=http://vimeo.com/343
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache
+      Access-Control-Allow-Origin:
+      - ! '*'
+      Access-Control-Allow-Headers:
+      - X-Requested-With
+      Expires:
+      - Tue, 12 Nov 2013 05:34:37 GMT
+      Last-Modified:
+      - Tue, 12 Nov 2013 00:44:16 GMT
+      Etag:
+      - ! '"4152cbb93fd485f51b909c0abe2531ea42069e27"'
+      X-Ua-Compatible:
+      - IE=edge
+      X-Dns-Prefetch-Control:
+      - 'on'
+      Vary:
+      - Accept-Encoding
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Date:
+      - Tue, 12 Nov 2013 05:33:37 GMT
+      X-Varnish:
+      - '498192664'
+      Age:
+      - '0'
+      Via:
+      - 1.1 varnish
+      X-Varnish-Cache:
+      - '0'
+      Connection:
+      - close
+      X-Vserver:
+      - 10.90.128.197
+    body:
+      encoding: US-ASCII
+      string: ! '{"type":"video","version":"1.0","provider_name":"Vimeo","provider_url":"https:\/\/vimeo.com\/","title":"You
+        need more focus.","author_name":"starfire","author_url":"http:\/\/vimeo.com\/starfire","is_plus":"0","html":"<iframe
+        src=\"\/\/player.vimeo.com\/video\/343\" width=\"320\" height=\"240\" frameborder=\"0\"
+        title=\"You need more focus.\" webkitallowfullscreen mozallowfullscreen allowfullscreen><\/iframe>","width":320,"height":240,"duration":0,"description":"","thumbnail_url":"http:\/\/b.vimeocdn.com\/ts\/455\/500\/45550004_295.jpg","thumbnail_width":295,"thumbnail_height":221,"video_id":343}'
+    http_version: 
+  recorded_at: Tue, 12 Nov 2013 05:33:37 GMT
+recorded_with: VCR 2.5.0

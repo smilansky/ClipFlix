@@ -1,12 +1,12 @@
 require 'spec_helper'
 
 feature 'My_queue' do
-  scenario 'user can reorder videos in my_queue' do
+  scenario 'user can reorder videos in my_queue', :vcr do
     
     movies = Fabricate(:category) 
-    xmen = Fabricate(:video, title: 'Xmen', category: movies)
-    futurama = Fabricate(:video, title: 'Futurama', category: movies )
-    monk = Fabricate(:video, title: 'Monk', category: movies)
+    xmen = Fabricate(:video, title: 'Xmen', category: movies, video_url: "vimeo.com/343")
+    futurama = Fabricate(:video, title: 'Futurama', category: movies, video_url: "vimeo.com/343" )
+    monk = Fabricate(:video, title: 'Monk', category: movies, video_url: "vimeo.com/343")
 
     sign_in
 

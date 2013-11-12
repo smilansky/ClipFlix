@@ -1,10 +1,10 @@
 require 'spec_helper'
 
 feature 'Social Networking' do
-  scenario 'current user can follow another user' do
+  scenario 'current user can follow another user', :vcr do
     movies = Fabricate(:category) 
     mike = Fabricate(:user)
-    xmen = Fabricate(:video, title: 'xmen', description: 'great action thriller', category: movies)
+    xmen = Fabricate(:video, title: 'xmen', description: 'great action thriller', category: movies, video_url: "vimeo.com/343")
     review = Fabricate(:review, user_id: mike.id, video_id: xmen.id)
     
     sign_in

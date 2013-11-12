@@ -6,7 +6,7 @@ feature 'Admin View Payment', js: true do
     Fabricate(:payment, amount: 999, reference_id: '12345', user: daniel)
   end
 
-  scenario 'Admin can view the payment', :vcr do
+  scenario 'Admin can view the payment' do
     admin_sign_in
 
     visit admin_view_payments_path

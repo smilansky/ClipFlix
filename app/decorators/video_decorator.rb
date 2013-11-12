@@ -25,7 +25,7 @@ class VideoDecorator
   end
 
   def vimeo_id
-    correct_video_url = @video.video_url.starts_with?("http://#{@video.video_url}") ? @video.video_url : "http://#{@video.video_url}"
+    correct_video_url = @video.video_url.starts_with?("http://") ? @video.video_url : "http://#{@video.video_url}"
     resource = OEmbed::Providers::Vimeo.get(correct_video_url)
     resource.video_id
   end
