@@ -1,7 +1,7 @@
 class VideoDecorator
   attr_reader :video
 
-  require 'Oembed'
+  require 'OEmbed'
 
   def initialize(video)
     @video = video
