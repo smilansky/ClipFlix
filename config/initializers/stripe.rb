@@ -1,4 +1,4 @@
-Stripe.api_key = ENV['STRIPE_SECRET_KEY'] 
+Stripe.api_key = Figaro.env.stripe_secrete_key
 
 StripeEvent.setup do
   subscribe 'charge.succeeded' do |event|
