@@ -30,6 +30,6 @@ module StripeWrapper
   end
 
   def self.set_api_key
-    Stripe.api_key = Rails.env.production? ? ENV['STRIPE_LIVE_API_KEY'] : ENV['STRIPE_SECRET_KEY']
+    Stripe.api_key = Rails.env.production? ? ENV['STRIPE_PUBLIC_KEY'] : ENV['STRIPE_SECRET_KEY']
   end
 end
