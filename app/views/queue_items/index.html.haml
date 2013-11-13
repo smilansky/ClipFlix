@@ -22,7 +22,7 @@
                   %td
                     = link_to queue_item.video_title, queue_item.video
                   %td
-                    = button_to "Play", nil, class: "btn"
+                    = link_to "Play", video_path(queue_item.video), class: "btn"
                   %td
                     = select_tag "queue_items[][rating]", options_for_select([5,4,3,2,1].map {|number| [pluralize(number, "Star"), number]}, queue_item.rating), include_blank: true
                   %td
