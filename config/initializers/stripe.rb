@@ -1,6 +1,6 @@
 require 'stripe'
 
-Stripe.api_key = "S5eZcyLrHDQM43WCbPoM95iPY1AXu6mm"
+Stripe.api_key = ENV['STRIPE_SECRET_KEY']
 
 StripeEvent.setup do
   subscribe 'charge.succeeded' do |event|
