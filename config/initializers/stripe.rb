@@ -1,3 +1,5 @@
+require 'stripe'
+
 Stripe.api_key = "S5eZcyLrHDQM43WCbPoM95iPY1AXu6mm"
 
 StripeEvent.setup do
