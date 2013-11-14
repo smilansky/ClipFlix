@@ -6,12 +6,16 @@ Stripe.setPublishableKey("#{ENV['STRIPE_PUBLISHABLE_KEY']}");
 
 = javascript_include_tag 'payment'
 
+.div 
+
 %section.register.container
   .row
     .span10.offset1
       = bootstrap_form_for @user, html: { class: "form-horizontal", id: "payment-form"} do |f|
         %header
           %h1 Register
+          %h3 Please use fake credit card info specified below - this demo app does not require actual payment!
+        %br
         %fieldset
         = f.email_field :email, label: "Email Address"
         = f.password_field :password
