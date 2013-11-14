@@ -29,6 +29,8 @@ Stripe.setPublishableKey("#{ENV['STRIPE_PUBLISHABLE_KEY']}");
             %label.control-label(for="security-code") Security Code
             .controls
               %input.span3#security-code(type="text" data-stripe="cvc")
+
+            (Use any 3 digit number, '123' for example)
           .control-group
             %label.control-label Expiration
             .controls
