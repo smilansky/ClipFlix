@@ -72,7 +72,7 @@ GEM
     fabrication (2.7.2)
     faker (1.1.2)
       i18n (~> 0.5)
-    ffi (1.9.0)
+    ffi (1.9.5)
     figaro (0.7.0)
       bundler (~> 1.0)
       rails (>= 3, < 5)
