@@ -184,7 +184,7 @@ GEM
       multi_json (~> 1.0)
       rubyzip
       websocket (~> 1.0.4)
-    shoulda-matchers (2.2.0)
+    shoulda-matchers (2.7.0)
       activesupport (>= 3.0.0)
     sidekiq (2.13.0)
       celluloid (>= 0.14.1)
