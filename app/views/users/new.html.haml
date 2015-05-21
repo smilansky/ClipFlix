@@ -14,7 +14,8 @@ Stripe.setPublishableKey("#{ENV['STRIPE_PUBLISHABLE_KEY']}");
       = bootstrap_form_for @user, html: { class: "form-horizontal", id: "payment-form"} do |f|
         %header
           %h1 Register
-          %h3 Please use fake credit card info specified below - this demo app does not require actual payment!
+          %h3 Please click the Autofill button to insert fake credit card info - this is a Demo application that does not require actual payment.
+          %button{:class => 'btn btn-info', :id => 'autofill'} Autofill 
         %br
         %fieldset
         = f.email_field :email, label: "Email Address"
@@ -28,13 +29,11 @@ Stripe.setPublishableKey("#{ENV['STRIPE_PUBLISHABLE_KEY']}");
             .controls
               %input.span3#credit-card-number(type="text" data-stripe="number")
 
-            (Use '4242424242424242')  
           .control-group
             %label.control-label(for="security-code") Security Code
             .controls
               %input.span3#security-code(type="text" data-stripe="cvc")
 
-            (Use any 3 digit number, '123' for example)
           .control-group
             %label.control-label Expiration
             .controls

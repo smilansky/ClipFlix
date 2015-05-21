@@ -5,7 +5,14 @@ jQuery(function($) {
 
     Stripe.createToken($form, stripeResponseHandler);
     return false;
+  } );
+
+$('#autofill').click(function(){
+    $('#credit-card-number').val('4242424242424242'); 
+    $('#security-code').val('123');
+    return false;
   });
+
 });
 
 var stripeResponseHandler = function(status, response) {
